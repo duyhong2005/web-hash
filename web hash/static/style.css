@@ -1,0 +1,99 @@
+body {
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px crimson;
+}
+
+h1, h2, h3 {
+    color: crimson;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    background: #1a1a1a;
+    border: 1px solid crimson;
+    color: #fff;
+    border-radius: 5px;
+}
+
+button {
+    background-color: crimson;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #1a1a1a;
+    border-left: 5px solid crimson;
+}
+
+/* File upload custom */
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-upload label {
+    background-color: #4d0000;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid crimson;
+}
+
+.file-upload label:hover {
+    background-color: #800000;
+}
+
+.file-upload span {
+    color: #ccc;
+    font-style: italic;
+}
+
+.copy-btn {
+    background-color: #4d0000;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+.copy-btn:hover {
+    background-color: #990000;
+}
+
+.copy-msg {
+    color: lime;
+    font-size: 0.9em;
+    margin-top: 5px;
+}

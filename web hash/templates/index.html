@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>💀 Horror Hash Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>💀 Horror Hash Tool</h1>
+
+        <!-- Băm văn bản / tệp -->
+        <form method="POST" enctype="multipart/form-data">
+            <h2>🧬 Băm văn bản hoặc tệp</h2>
+
+            <label>✍️ Nhập văn bản cần băm:</label><br>
+            <textarea name="text_input" rows="6">{{ text_input }}</textarea><br><br>
+
+            <label>📁 Hoặc chọn tệp để băm:</label><br>
+            <div class="file-upload">
+                <label for="fileInput">📁 Chọn tệp</label>
+                <input type="file" name="file" id="fileInput" onchange="updateFilename(this)">
+                <span id="file-name">Chưa có tệp</span>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" name="hash_sha256">🔓 Băm SHA-256</button>
+                <button type="submit" name="hash_sha512">🧬 Băm SHA-512</button>
+            </div>
+        </form>
+
+        {% if hash_result %}
+            <div class="result">
+                <h3>☠️ Kết quả {{ selected_algo }}:</h3>
+                {% if file_uploaded %}
+                    <p><strong>File:</strong> {{ file_uploaded }}</p>
+                {% endif %}
+                <textarea id="hashOutput" rows="4" style="width:100%;">{{ hash_result }}</textarea>
+                <button class="copy-btn" onclick="copyHash()">📋 Sao chép</button>
+                <div class="copy-msg" id="copyMessage" style="display: none;">✅ Đã sao chép!</div>
+            </div>
+        {% endif %}
+
+        <!-- Kiểm tra toàn vẹn -->
+        <form method="POST" enctype="multipart/form-data">
+            <h2>🔍 Kiểm tra tính toàn vẹn tệp bằng SHA-512</h2>
+
+            <div class="file-upload">
+                <label for="fileInput2">📁 Chọn tệp</label>
+                <input type="file" name="file" id="fileInput2" onchange="updateFilename(this)">
+                <span id="file-name">Chưa có tệp</span>
+            </div>
+
+            <label>🔐 Nhập mã băm SHA-512 đã biết:</label><br>
+            <textarea name="entered_hash" rows="4" style="width:100%;" required>{{ entered_hash }}</textarea><br><br>
+
+            <button type="submit" name="verify_hash">🧪 Kiểm tra toàn vẹn</button>
+        </form>
+
+        {% if verify_result %}
+            <div class="result">
+                <h3>{{ verify_result }}</h3>
+                {% if file_uploaded %}
+                    <p><strong>File kiểm tra:</strong> {{ file_uploaded }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function copyHash() {
+            const copyText = document.getElementById("hashOutput");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+
+            const msg = document.getElementById("copyMessage");
+            msg.style.display = "block";
+            setTimeout(() => {
+                msg.style.display = "none";
+            }, 2000);
+        }
+
+        function updateFilename(input) {
+            const fileName = input.files[0] ? input.files[0].name : "Chưa có tệp";
+            const span = input.parentNode.querySelector('span');
+            span.textContent = fileName;
+        }
+    </script>
+</body>
+</html>
